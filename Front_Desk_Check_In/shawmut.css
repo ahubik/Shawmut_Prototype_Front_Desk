@@ -1,0 +1,28 @@
+.panel-shawmut > .panel-heading {
+  color: #ffffff;
+  background-color: #5d5597;
+  border-color: #3c9a5f;
+}
+.panel-shawmut > .panel-body {
+  color: #ffffff;
+  background-color: #5d5597;
+  border: 0px solid transparent;
+  border-color: #3c9a5f;
+}
+.panel-shawmut > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #3c9a5f;
+}
+.panel-shawmut > .panel-heading .badge {
+  color: #43ac6a;
+  background-color: #ffffff;
+}
+.panel-shawmut > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #3c9a5f;
+}
+
+  margin-bottom: 21px;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 0;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);

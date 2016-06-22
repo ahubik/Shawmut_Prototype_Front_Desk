@@ -1,0 +1,10 @@
+table.fixed { table-layout:fixed; width:700px; word-break:break-all;}
+tr.oddRow {background-color:#5d5597;}
+tr.evenRow {background-color:#7b75a4;}
+tr.headerRow {background-color:#2d2567;}
+.lightBG {background-color:#7b75a4;}
+.centered {margin: 0 auto;}
+.fixedWidth {margin: 100px;}
+.inline {display:inline-block; vertical-align: bottom; height:inherit;}
+.floatLeft {float:left;}
+.infoBox {border-radius: 20px; padding: 20px; border: 2px solid black;}
