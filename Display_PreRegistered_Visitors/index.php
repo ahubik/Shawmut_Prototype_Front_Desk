@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<meta http-equiv="refresh" content="300; URL='index.html'" />
+	<!-- <meta http-equiv="refresh" content="300; URL='index.php'" /> -->
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,17 +12,21 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>Welcome to Shawmut</title>
+    
+    <!-- JS -->
+    <script src='../jquery-2.2.4.min.js'></script>
+    <script src='../bootstrap-3.3.6-dist/js/bootstrap.min.js'></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+<!--     <link href="../dist/css/sb-admin-2.css" rel="stylesheet"> -->
     <link href="table.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
     <link href="cover.css" rel="stylesheet">
     <link href="shawmut.css" rel="stylesheet">
 
@@ -39,26 +43,29 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
      <![endif] -->
     
-    <script src='../jquery-3.0.0.min.js'></script>
+    <link href="../global.css" rel="stylesheet">
+    
     <script>
     //alert('The event handler assginment script runs test how alerts deal with long strings aaaadsfasdfsdfasaaaaaaaaaaaaaaaaaaaaaa');
     jQuery(document).ready(function($) {
     	//alert('Jquery statements work');
+    	//$("#confirm-registration").modal();
+    	
         $(".clickable-element").click(function() {
             //alert('a click was registered, href=' + $(this).data("href"));
-            window.document.location = $(this).data("href");
+            //window.document.location = $(this).data("href");
+            $("#confirm-registration").modal();
         });
     });
     </script>
   </head>
 
 <body>
-<style type="text/css">
-   body { background: #5d5597 !important; }
-</style>
+
     <div id="wrapper">
         <div id="page-wrapper" class="span10">
-            <div class="row">
+			
+			<div class="row">
                 <div class="col-lg-12">
                     <a href="../signin/index.html"><img src="img/shawmut-logo.png" alt="Shawmut" max-height="100%" max-width="100%"></a>
                     <!-- h1 class="page-header">Pre-Registered visitors</h1>-->
@@ -195,6 +202,26 @@
 <!--     <script src="../dist/js/sb-admin-2.js"></script> -->
 <!-- This stuff is commented because the source as I (Alexander Hubik) recieved it does not contain the files referenced -->
 
+
+<div class="modal fade" id="confirm-registration" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2>Confirm Registration</h2>
+			</div>
+			<div class="modal-body">
+				<p>Confirm Registration</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default"
+					data-dismiss="modal">Cancel</button>
+				<a class="btn btn-danger btn-ok">Register</a>
+			</div>
+		</div>
+	</div>
+</div>
+				
 </body>
 
 </html>
