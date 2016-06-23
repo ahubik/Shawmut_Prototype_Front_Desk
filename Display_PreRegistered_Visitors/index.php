@@ -18,7 +18,7 @@
     <script src='../bootstrap-3.3.6-dist/js/bootstrap.min.js'></script>
 
     <!-- Bootstrap Core CSS -->
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <!-- <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/3.3.6/css/bootstrap-combined.min.css" rel="stylesheet"> -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -31,7 +31,7 @@
     <link href="shawmut.css" rel="stylesheet">
 
     <!-- Date Time Picker -->
-    <link href="css/bootstrap-datetimepicker.min.css">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen"
      href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    
 
@@ -64,46 +64,40 @@
 
     <div id="wrapper">
         <div id="page-wrapper" class="span10">
-			
 			<div class="row">
                 <div class="col-lg-12">
                     <a href="../signin/index.html"><img src="img/shawmut-logo.png" alt="Shawmut" max-height="100%" max-width="100%"></a>
                     <!-- h1 class="page-header">Pre-Registered visitors</h1>-->
-				</div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <br><br><br>
+				</div><!-- /.col-lg-12 -->
+            </div> <!-- /.row -->
+            <br><br><br><!-- Replace these with a bootstrap solution -->
             <div class="row">
-                <div class="col-lg-12"></div>
+                <div class="col-lg-12"><!-- a /div has been removed, because it seemed like it shouldn't be closed here, and I close it at the bottom of the page -->
                     <div class="panel panel-shawmut" style="border:none">
-<!--                         <div class="panel-heading"> -->
-<!--                         </div> -->
+<!--                         <div class="panel-heading"></div> -->
                         <div class="panel-body panel-shawmut" style="border:none">
                             <div class="row">
                             	<div class="col-lg-1"></div>
                                 <div class="col-lg-5" style="border:none; width=100%">
 		                        	<div class="lightBG center-block infoBox">
 		                            	Preregistered guests please click your name to sign in.  If your name is not on the list, please click on the "Register" button to the right.
-		                            </div>
-		                        </div>
+		                            </div><!-- .lightBG .center-block .infobox -->
+		                        </div><!-- col-lg-5 -->
 		                        <div class="col-lg-1"></div>
 		                        <div class="col-lg-5" style="border:none;">
-		                        
 	                                <div class="round-button pull-left">
 		                                <div class="round-button-circle">
 			                                <a href="../Front_Desk_Check_In" class="round-button">Register</a>
-		                                </div>
-	                                </div>
-	                                
-	                             </div>
-	                         </div>
-	                         <br><br>
-	                         <div class="row">
+		                                </div><!-- /.round-button-circle -->
+	                                </div><!-- /.round-button .pull-left -->
+	                            </div><!-- /.col-lg-5 -->
+	                        </div><!-- /row (containing info blurb and button) -->
+	                        <br><br><!-- use bootstrap solution -->
+	                        <div class="row">
 	                         	<div class="col-lg-12 center-block container">
 	                                <table class="table" style="margin: 0 auto; font-size: 20px;"><!-- Slightly kludgey but it works -->
-	                                <thead> <!-- /thead-->
 	                                <?php 
+	                                echo"<thead>";
 	                                
 	                                $path = "PreRegistered_Visitor_Data.csv";
 	                                if (file_exists($path)) {
@@ -120,6 +114,7 @@
 									$firstLine = True;
 									$oddRow = True;
 									$classStr = "";
+									
 									while(!feof($pointer))
 	  								{
 										$line = fgets($pointer);
@@ -170,24 +165,14 @@
 									
 	                                ?>
 	                                </table>                 
-                                </div>
-                                </div>
-                                
-                            </div>
-                            <!-- /.row (nested) -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
+                                </div><!-- /col-lg-12 containing table -->
+                            </div><!-- /row (nested 1nd deg., containing table)-->
+                    	</div><!-- /.panel-body .panel-shawmut-->
+                	</div> <!-- /.panel .panel-shawmut-->
+            	</div><!-- /.col-lg-12 -->
+        	</div><!-- /.row -->
+    	</div><!-- /#page-wrapper .span-10-->
+	</div><!-- /#wrapper -->
 
     <!-- jQuery -->
 <!--     <script src="../bower_components/jquery/dist/jquery.min.js"></script> -->
@@ -203,25 +188,24 @@
 <!-- This stuff is commented because the source as I (Alexander Hubik) recieved it does not contain the files referenced -->
 
 
-<div class="modal fade" id="confirm-registration" tabindex="-1"
-	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h2>Confirm Registration</h2>
-			</div>
-			<div class="modal-body">
-				<p>Confirm Registration</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default"
-					data-dismiss="modal">Cancel</button>
-				<a class="btn btn-danger btn-ok">Register</a>
-			</div>
-		</div>
-	</div>
-</div>
-				
+
+	<div class="modal fade" id="confirm-registration" tabindex="-1" role="dialog"><!-- aria-labelledby="myModalLabel" aria-hidden="true" -->
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>Confirm Registration</h2>
+				</div><!-- .modal-header -->
+				<div class="modal-body">
+					<p>Confirm Registration</p>
+				</div><!-- .modal-body -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-danger btn-ok">Register</a>
+				</div><!-- .modal-footer -->
+			</div><!-- .modal-content -->
+		</div><!-- .modal-dialog -->
+	</div><!-- .modal .fade #confirm-registration-->
+	
 </body>
 
 </html>
