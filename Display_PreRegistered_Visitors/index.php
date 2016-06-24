@@ -54,6 +54,11 @@
         $(".clickable-element").click(function() {
             //alert('a click was registered, href=' + $(this).data("href"));
             //window.document.location = $(this).data("href");
+            target = $(this).data("href");
+            $("#confirmation-modal-body-text").text("Are you " + $(this).data("first") + " " + $(this).data("last") + " from " + $(this).data("company") + "?");
+            $("#confirmation-modal-yes-button").click(function() {
+            	window.document.location = target;
+            });
             $("#confirm-registration").modal();
         });
     });
@@ -118,11 +123,15 @@
 									while(!feof($pointer))
 	  								{
 										$line = fgets($pointer);
+										
+										$items = explode(',', $line);
+										//echo "[".implode("|", $items)."] <br>";
+										
 										$clickableString = "";//only populated for lines other than ther header (so that including it in the header generation just concats an empty string to it.
 										
 										if ($firstLine) { //If it's the column titles
 											$keys = $line;//save them as the keys
-											$clickableString = " class='headerRow'";//Variable name misused for kludge but it makes it dark as appropriate
+											$clickableString = " class='headerRow'";//Variable name misused for kludge but this is the easiest way to make it dark as appropriate
 											
 										} else {//otherwise it's a data row
 											$classStr = "";
@@ -132,13 +141,13 @@
 												$classStr .= " evenRow";
 											}
 											$clickableString = " class='clickable-element".$classStr."' data-href='RecordVisitor.php?data=".urlencode($line)."&keys=".urlencode($keys)."'";//so add code to make them clickable
+											$clickableString .= " data-first='".$items[1]."' data-last='".$items[2]."' data-company='".$items[3]."'";
 											$oddRow = ! $oddRow;
 										}
 										echo "<tr" . $clickableString . ">\n";
 										//echo "<a href='RecordVisitor.php'>";//Ineffective
 																			
-										$items = explode(',', $line);
-										//echo "[".implode("|", $items)."] <br>";
+										
 										$count = 0; //debug
 										
 										$rowString = "";
@@ -193,14 +202,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h2>Confirm Registration</h2>
+					<h2 id="confirmation-modal-header-text">Confirm Registration</h2>
 				</div><!-- .modal-header -->
 				<div class="modal-body">
-					<p>Confirm Registration</p>
+					<p id="confirmation-modal-body-text">This field has not populated correctly.  Please contact the system administrator.</p>
 				</div><!-- .modal-body -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-danger btn-ok">Register</a>
+					<a id="confirmation-modal-yes-button" class="btn btn-danger btn-ok">Register</a>
 				</div><!-- .modal-footer -->
 			</div><!-- .modal-content -->
 		</div><!-- .modal-dialog -->
