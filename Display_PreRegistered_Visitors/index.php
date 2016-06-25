@@ -54,8 +54,12 @@
         $(".clickable-element").click(function() {
             //alert('a click was registered, href=' + $(this).data("href"));
             //window.document.location = $(this).data("href");
-            target = $(this).data("href");
-            $("#confirmation-modal-body-text").text("Are you " + $(this).data("first") + " " + $(this).data("last") + " from " + $(this).data("company") + "?");
+            finalDestination = $(this).data("href");//the URL to be called after removing the line
+            //and now, build the call to the script (kludge, make this more elegant if this project continues) that removes the line
+            target = "Remove_Item_From_PreRegistered_List_Kludge.php?destination=" + encodeURIComponent(finalDestination);//call the script and add the final destination
+            target += "&remove=" + $(this).data("row");//tell it which row to delete
+            
+            $("#confirmation-modal-body-text").text("Are you " + $(this).data("first") + " " + $(this).data("last") + " from " + $(this).data("company") + "?";//(Row #" + $(this).data("row") + ")?");
             $("#confirmation-modal-yes-button").click(function() {
             	window.document.location = target;
             });
@@ -116,44 +120,48 @@
 									//echo "<br>"; //Debugging
 									
 									$keys = "";
-									$firstLine = True;
-									$oddRow = True;
+									//$firstLine = True;
+									//$oddRow = True;
+									$rowCount = 0;
 									$classStr = "";
 									
 									while(!feof($pointer))
 	  								{
 										$line = fgets($pointer);
 										
+										if (strlen(trim($line)) == 0){
+											continue;
+										}
+										
 										$items = explode(',', $line);
 										//echo "[".implode("|", $items)."] <br>";
 										
 										$clickableString = "";//only populated for lines other than ther header (so that including it in the header generation just concats an empty string to it.
 										
-										if ($firstLine) { //If it's the column titles
+										if ($rowCount == 0) { //If it's the column titles
 											$keys = $line;//save them as the keys
 											$clickableString = " class='headerRow'";//Variable name misused for kludge but this is the easiest way to make it dark as appropriate
 											
 										} else {//otherwise it's a data row
 											$classStr = "";
-											if ($oddRow){
+											if ($rowCount%2 != 0){
 												$classStr .= " oddRow";
 											} else {
 												$classStr .= " evenRow";
 											}
 											$clickableString = " class='clickable-element".$classStr."' data-href='RecordVisitor.php?data=".urlencode($line)."&keys=".urlencode($keys)."'";//so add code to make them clickable
-											$clickableString .= " data-first='".$items[1]."' data-last='".$items[2]."' data-company='".$items[3]."'";
-											$oddRow = ! $oddRow;
+											$clickableString .= " data-first='".$items[1]."' data-last='".$items[2]."' data-company='".$items[3]."' data-row='".$rowCount."'";
+											//$oddRow = ! $oddRow; this is now handled by incrementing $rowCount
 										}
 										echo "<tr" . $clickableString . ">\n";
-										//echo "<a href='RecordVisitor.php'>";//Ineffective
+										//echo "<td>$rowCount</td>";
 																			
 										
-										$count = 0; //debug
+										$count = 0;
 										
 										$rowString = "";
 										reset($items);
 										foreach ($items as $item) {
-											//echo "<td>" . $item ." (no. ". $count . ")</td>";
 											if ($count != 0 && $count !=7 && $count !=8){//Skip the form name and, for now, image fields as they're of no interest to anyone
 												$rowString .= "<td>" . $item . "</td>\n";
 											}
@@ -164,10 +172,11 @@
 										//echo "</a>";
 										echo "</tr>\n";
 	
-										if ($firstLine) {
+										if ($rowCount == 0) {
 											echo "</thead>";
-											$firstLine = False;//and indicate that we've processes the firstline
+											//$firstLine = False;//and indicate that we've processes the firstline
 										}
+										$rowCount += 1;
 	  								}
 	  								
 									fclose($pointer);
